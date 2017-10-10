@@ -73,7 +73,9 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ---
 
-+++?code=snippet/JdbcConnection.java&lang=java&title=JDBC Transaction
+### JDBC Transaction
+
++++?code=snippet/JdbcConnection.java&lang=java
 
 @[2](AutoCommit(false) 는 곧 START TRANSACTION 임)
 @[4](정상 처리되면 commit)
@@ -82,7 +84,9 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ---
 
-+++?code=snippet/TransactionTemplate.java&lang=java&title=TransactionTemplate
+### TransactionTemplate
+
++++?code=snippet/TransactionTemplate.java&lang=java
 
 @[9](Spring 에서 DI 된 transactionManager 로부터 트랜잭션을 가져온다)
 @[12](콜백 클래스의 doInTransaction 을 실행한다)
@@ -90,6 +94,8 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 @[29](Exception 이 발생하지 않았으면 commit 한다)
 
 +++
+
+### TransactionTemplate Usage
 
 +++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java&title=TransactionTemplate Usage
 
