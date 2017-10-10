@@ -73,10 +73,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ---
 
-### JDBC Transaction
-
-
-+++?code=snippet/JdbcConnection.java&lang=java&title=JdbcConnection
++++?code=snippet/JdbcConnection.java&lang=java&title=JDBC Transaction
 
 @[2](AutoCommit(false) 는 곧 START TRANSACTION 임)
 @[4](정상 처리되면 commit)
@@ -84,8 +81,6 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 @[7-9](성공,실패 상관 없이 커넥션은 꼭 닫아줘야한다)
 
 ---
-
-### TransactionTemplate
 
 +++?code=snippet/TransactionTemplate.java&lang=java&title=TransactionTemplate
 
