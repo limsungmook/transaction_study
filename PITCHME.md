@@ -75,14 +75,11 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 
 ## JDBC Transaction
+
 ```java
 try {
     dbConnection.setAutoCommit(false);
-
-    //SQL insert statement
-    //SQL update statement
-    //SQL delete statement
-
+    //SQL insert, update, delete statement
     dbConnection.commit();
 } catch (SQLException e) {
     dbConnection.rollback();
