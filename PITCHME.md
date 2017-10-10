@@ -19,7 +19,7 @@
 ### ANSI Isolation Levels
 
 | Isolation level | Dirty reads | Non-repeatable reads | Phantoms | Read Operation |
-| :---- | :---- | :----: | :---: | :----: | :---- |
+| :---- | :---- | :----: | :---: |  :---- |
 | Read Uncommitted | may occur   | may occur |  may occur   | not used |
 | Read Committed     | don't occur | may occur |  may occur   | during statement |
 | Repeatable Read     | don't occur | don't occur |  may occur  | until commit |
