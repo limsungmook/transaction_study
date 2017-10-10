@@ -97,13 +97,15 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### TransactionTemplate Usage
 
-+++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java&title=TransactionTemplate Usage
++++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java
 
 @[72-73, 76-80](TransactionAutoConfiguration 에 의해 DI 받은 transactionTemplate 을 통해 실행)
 
 ---
 
-+++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=@Transactional
+### @Transactional
+
++++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java
 
 @[70-73](@Transactional 적용)
 
