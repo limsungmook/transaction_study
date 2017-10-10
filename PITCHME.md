@@ -359,6 +359,8 @@ public void startLock(Long gluServerId) {
 
 호출하는 트랜잭션이 writable 하기 때문에 read-only 는 ignore 된다
 
+@[54-65](여기서 트랜잭션이 시작되면 read-only 하지만 외부 트랜잭션에서 실행되면 ignore 된다)
+
 ---
 
 ### @Async
