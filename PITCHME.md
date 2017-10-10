@@ -5,7 +5,7 @@
 
 
 #### 사전지식 - Quiz
--  MySQL 쿼리 실행 결과를 맞춰주세요
+<span style="font-size: 80%">MySQL 쿼리 실행 결과를 맞춰주세요</span>
 
 <img src="assets/quiz.jpg" alt="Quiz" style="max-height: 50%;" />
 
@@ -29,6 +29,8 @@
 ### Isolation - Read Uncommitted
 
 ![Read Uncommitted](assets/read_uncommitted.jpg)
+
+### Isolation - Read Uncommitted
 
 <span style="font-size:0.6em; color:gray">
 트랜잭션 시작과 종료 사이에 CUD 가 발생했을 때, 즉 commit 하지 않고 실제 DB 에 반영되지 않았더라도 다른 세션에서 *변경중인 데이터*를 읽을 수 있다. 트랜잭션이 시작되면 commit 명령을 날리기 전엔 변경사항들이 snapshot 에 저장이 되는데, 이 snapshot 에 있는 데이터를 읽을 수 있다는 의미다. 아래 예제를 보자.
