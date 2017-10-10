@@ -143,7 +143,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 1. 새로운 EntityManager 를 생성할 것인가, 아니면 Share 해서 사용할 것인가
 1. 새로운 DB 트랜잭션을 시작해야 하는가?
 
-Transaction Aspect 의 'before' 에서 호출되어 위 사항을 결정한다
+Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 
 ---
 
@@ -159,8 +159,9 @@ Transaction Aspect 의 'before' 에서 호출되어 위 사항을 결정한다
 
 ### TransactionSynchronizationManager - Bind properties
 
-1. TransactionManager 에서 가져온 두 객체(EntityManager, Connection)을 ThreadLocal 에 저장
+1. TransactionManager 에서 가져온 두 객체(EntityManager, Connection)를 ThreadLocal 에 저장
 1. EntityManager Proxy(SharedEntityManagerInvocationHandler에서 invoke) 에서도 공유해서 사용
+1. Open-in-view Interceptor 에서도 공유해서 사용
 
 ---
 
@@ -185,8 +186,8 @@ Transaction Aspect 의 'before' 에서 호출되어 위 사항을 결정한다
 
 1. Annotation 으로 설정된 @Transactional 을 활성화한다
 1. 기본은 Spring Proxy AOP, 즉 JDK 기본 Interface AOP 를 제공한다(설정으로 AspectJ 가능)
-1. 내부 클래스 흐름은 @EnableTransactionManagement -> TransactionManagementConfigurationSelector -> ProxyTransactionManagementConfiguration -> BeanFactoryTransactionAttributeSourceAdvisor
-에서 PointCut 에 해당하는 @Transactional 정보를 갖고 있는 AnnotationTransactionAttributeSource 와 실제 Advice 를 수행하는 TransactionalInterceptor 가 Advisor 수행된다
+1. 내부 클래스 흐름은 <span style="font-size:60%">@EnableTransactionManagement -> TransactionManagementConfigurationSelector -> ProxyTransactionManagementConfiguration -> BeanFactoryTransactionAttributeSourceAdvisor
+에서 PointCut 에 해당하는 @Transactional 정보를 갖고 있는 AnnotationTransactionAttributeSource 와 실제 Advice 를 수행하는 TransactionalInterceptor 가 Advisor 수행된다</span>
 
 
 ---
