@@ -316,12 +316,12 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 ### NESTED
 
 
-<img src="assets/nested.jpg" alt="nested" style="margin-top: 0px; width:80%;" />
+<img src="assets/nested.jpg" alt="nested" style="margin-top: 0px; width:70%;" />
 
 <ol>
 <li style="font-size: 70%; color:white;">Hibernate 에선 지원하지 않음</li>
 <li style="font-size: 70%; color:white;">외부 트랜잭션에 속한 내부 트랜잭션 생성</li>
-<li style="font-size: 70%; color:white;">외부 트랜잭션에 SavePoint 를 두고 내부 트랜잭션에서 Rollback 시 SavePoint 를 원복</li>
+<li style="font-size: 70%; color:white;">외부 트랜잭션에 SavePoint 를 두고 Rollback 시 SavePoint 를 원복</li>
 <li style="font-size: 70%; color:white;">외부 트랜잭션이 종료돼야 내부 트랜잭션도 commit</li>
 </ol>
 
@@ -402,3 +402,7 @@ public void startLock(Long gluServerId) {
 <li style="font-size: 70%; color:white;">Spring AOP Proxy 는 Interface 를 통해서만 Proxy 를 실행한다</li>
 <li style="font-size: 70%; color:white;">즉, Annotation 이 무시될 수 있으니 주의할 것!</li>
 </ol>
+
+---
+
+# 감사합니다
