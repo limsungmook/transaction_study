@@ -238,12 +238,12 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 
 +++
 
+<img src="assets/implicit_transaction.jpg" alt="Implicit_transaction" style="margin-top: 0px; width:80%;" />
 
-![Implicit_transaction ](assets/implicit_transaction.jpg)
-
-1. 미리 시작된 트랜잭션이 있을 때 참여한다
-1. Bean2 는 별도의 Proxy 로 진행되지 않는다
-1. method2 에서 Exception 이 발생해도 catch 만 하면 Rollback 되지 않는다
+<ol>
+<li style="font-size: 70%; color:white;">미리 시작된 트랜잭션이 있을 때 참여한다</span>
+<li style="font-size: 70%; color:white;">Bean2 는 별도의 Proxy 로 진행되지 않는다</span>
+<li style="font-size: 70%; color:white;">method2 에서 Exception 이 발생해도 catch 만 하면 Rollback 되지 않는다</span>
 
 +++?code=src/test/java/com/sungmook/transaction/implicit_transaction/TransactionTest.java&lang=java&title=REQUIRED @Transactional
 
