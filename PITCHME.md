@@ -316,7 +316,6 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 ### NESTED
 
 
-![nested](assets/nested.jpg)
 <img src="assets/nested.jpg" alt="nested" style="margin-top: 0px; width:80%;" />
 
 <ol>
@@ -345,7 +344,6 @@ public void startLock(Long gluServerId) {
     lockRepository.locking(gluServerId);
 }
 ```
-+++?code=snippet/lock.java&lang=java&title=Infinity Lock issue
 
 @[1](@Transaction 이 없으면 외부 트랜잭션에 편승함. 위 startLock 이 다양한 곳에서 호출되었는데, 트랜잭션이 있는 곳도 있고 없는 곳도 있었음)
 @[4-5, 11](DB 를 MySQL 을 사용하고 있었는데, MySQL 기본 Isolation 인 Repeatable-read 로 트랜잭션이 실행됐을 때 위 메소드가 종료되지 않아 장애가 몇번 일어남)
