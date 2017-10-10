@@ -224,13 +224,11 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 
 ### REQUIRED
 
-<img src="assets/required.jpg" alt="Required" style="margin-top: 0px; width: 70%;" />
+<img src="assets/required.jpg" alt="Required" style="margin-top: 0px; width:80%;" />
 
-<span style="font-size: 70%">
-1. 미리 시작된 트랜잭션이 있으면 참여하고 없으면 새로 시작한다
-1. Spring 기본이며 대부분의 케이스엔 REQUIRED 면 충분하다
-1. 어디서든 Exception 이 발생하면 전체가 롤백된다
-</span>
+1. <span style="font-size: 70%">미리 시작된 트랜잭션이 있으면 참여하고 없으면 새로 시작한다</span>
+1. <span style="font-size: 70%">Spring 기본이며 대부분의 케이스엔 REQUIRED 면 충분하다</span>
+1. <span style="font-size: 70%">어디서든 Exception 이 발생하면 전체가 롤백된다</span>
 
 +++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=REQUIRED @Transactional
 
