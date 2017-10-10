@@ -48,7 +48,7 @@ MySQL 쿼리 실행 결과를 맞춰주세요
 
 ### Isolation - Repeatable Read
 
-![Repeatable Read](assets/repeatable_read.jpg) { margin: 0 }
+<img src="assets/repeatable_read.jpg" alt="Repeatable Read" style="margin-top: 0px;" />
 
 <span style="font-size: 80%">
 cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동일한 데이터가 나온다.
