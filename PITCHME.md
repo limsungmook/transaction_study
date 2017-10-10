@@ -75,7 +75,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### JDBC Transaction
 
-+++?code=snippet/JdbcConnection.java&lang=java
++++?code=snippet/JdbcConnection.java&lang=java&title=JDBC 홈페이지 예제
 
 @[2](AutoCommit(false) 는 곧 START TRANSACTION 임)
 @[4](정상 처리되면 commit)
@@ -86,7 +86,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### TransactionTemplate
 
-+++?code=snippet/TransactionTemplate.java&lang=java
++++?code=snippet/TransactionTemplate.java&lang=java&title=TransactionTemplate 내부 구현
 
 @[9](Spring 에서 DI 된 transactionManager 로부터 트랜잭션을 가져온다)
 @[12](콜백 클래스의 doInTransaction 을 실행한다)
@@ -97,7 +97,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### TransactionTemplate Usage
 
-+++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java
++++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java&title=간단한 TransactionTemplate 사용법
 
 @[72-73, 76-80](TransactionAutoConfiguration 에 의해 DI 받은 transactionTemplate 을 통해 실행)
 
@@ -105,18 +105,22 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### @Transactional
 
-+++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java
++++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=간단한 @Transactional 사용법
 
 @[70-73](@Transactional 적용)
 
 ---
 
-### @Transactional 이 갖는 두 개의 Life Cycle
-- Database Transaction
+### @Transactional Life Cycle - Database Transaction
+
   1. @Transactional 어노테이션은 하나의 DB 트랜잭션 범위를 정의한다
   1. DB 트랜잭션은 Persistent Context 내에서 수행된다
-- Persistence Context
-  1. Persistence Context 는 하나의 EntityManager 로 수행되는 범위다
+
+---
+
+### @Transactional Life Cycle - Persistent Context
+
+  1. Persistent Context 는 하나의 EntityManager 로 수행되는 범위다
   1. (EntityManager 는 내부적으로 하나의 하이버네이트 Session 을 사용함)
   1. 자바 오브젝트의 변화를 추적하고 변경된 내용을 DB 에 반영하는 역할을 수행함
   1. 컨텍스트에 여러개의 DB 트랜잭션이 있을 수 있다(open-in-view, PersistenceContextType.EXTENDED)
