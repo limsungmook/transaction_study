@@ -97,9 +97,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ---
 
-##  @Transactional
-
-+++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=Simple @Transactional
++++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=@Transactional
 
 @[70-73](@Transactional 적용)
 
