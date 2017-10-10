@@ -204,14 +204,13 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 ### OpenEntityManagerInViewInterceptor(Open-in-view)
 
 1. Hibernate : Open Session In View. JPA : Open EntityManager In View
-1. OpenInView 가 켜지면 OpenEntityManagerInViewInterceptor 가 등록됨
 1. 요청(request) 시작 전에 미리 직접 EntityManager 를 생성하고 EntityManagerHolder 에 EntityManager 를 저장
 1. 홀더는 실제 트랜잭션 매니저에서 그대로 활용.
 1. 요청(request) 종료 시 생성한 EntityManager 를 반환(close, remove)
 
 ---
 
-## Application Transaction Propagation
+### Application Transaction Propagation
 
 - REQUIRED ( default )
 - SUPPORTS
