@@ -1,12 +1,11 @@
-## Spring @Transactional 에 대해
+## Spring @Transactional
 ##### <span style="font-family:Helvetica Neue; font-weight:bold">Deep Dive into <span style="color:#e49436">@Transactional</span> </span>
 
 ---
 
 
-## 사전지식 - Quiz
-
-### MySQL 쿼리 실행 결과를 맞춰주세요
+#### 사전지식 - Quiz
+##### MySQL 쿼리 실행 결과를 맞춰주세요
 
 ![Quiz](assets/quiz.jpg)
 
@@ -30,12 +29,12 @@
 
 ### ANSI Isolation Levels
 
-| Isolation level | Dirty reads | Non-repeatable reads | Phantoms | Write Operation | Read Operation | Range Operatation (… where …) |
-| ---- | :---- | :----: | :---: | :----: | :----: | :---- |
-| Read Uncommitted | may occur   | may occur |  may occur   | until commit | not used                 | not used
-| Read Committed     | don't occur | may occur |  may occur   | until commit | during statement    | not used
-| Repeatable Read     | don't occur | don't occur |  may occur   | until commit | until commit            | not used
-| Serializable              | don't occur  | don't occur |  don't occur | until commit | until commit            | until commit
+| Isolation level | Dirty reads | Non-repeatable reads | Phantoms | Read Operation
+| ---- | :---- | :----: | :---: | :----: | :---- |
+| Read Uncommitted | may occur   | may occur |  may occur   | not used
+| Read Committed     | don't occur | may occur |  may occur   | during statement
+| Repeatable Read     | don't occur | don't occur |  may occur  | until commit
+| Serializable              | don't occur  | don't occur |  don't occur | until commit
 
 - ANSI 표준에서의 네 가지 Isolation
 - 성능 : 위에서 아래 방향 순서로 좋다
