@@ -137,13 +137,17 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ---
 
-### Transaction Manager
+### Transaction Manager - Responsibility
 
-두 가지 책임을 갖고 있다
+두 가지 책임
 1. 새로운 EntityManager 를 생성할 것인가, 아니면 Share 해서 사용할 것인가
 1. 새로운 DB 트랜잭션을 시작해야 하는가?
 
-- Transaction Aspect 의 'before' 에서 호출되어 위 사항을 결정한다
+Transaction Aspect 의 'before' 에서 호출되어 위 사항을 결정한다
+
+---
+
+### Transaction Manager - Start transaction
 
 트랜잭션이 시작되면 다음을 진행한다
 1. 새로운 EntityManager 를 만든다
@@ -151,9 +155,9 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 1. DB Connection pool(DataSource)로부터 Connection 을 가져온다
 1. Connection 을 현재 쓰레드에 Bind 한다
 
-- 쓰레드에 bind 한다는 의미는 ThreadLocal 에 두 객체(EntityManager, Connection)을 저장한다는 의미
-- TransactionSynchronizationManager 의 ThreadLocal Property 로 저장
-- EntityManager Proxy(SharedEntityManagerInvocationHandler에서 invoke) 에서도 공유해서 사용
+### TransactionSynchronizationManager - Bind properties
+1. TransactionManager 에서 가져온 두 객체(EntityManager, Connection)을 ThreadLocal 에 저장
+1. EntityManager Proxy(SharedEntityManagerInvocationHandler에서 invoke) 에서도 공유해서 사용
 
 ---
 
