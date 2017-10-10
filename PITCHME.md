@@ -7,25 +7,11 @@
 #### 사전지식 - Quiz
 -  MySQL 쿼리 실행 결과를 맞춰주세요
 
-
-| 문제 | 답
-| --- | --- |
-| <img src="assets/quiz.jpg" alt="Quiz" style="max-height: 50%;" /> |
-1. 1, 2, 2, 3
-1. 1, 2, 1, 1
-1. 1, 2, 1, 3
-1. 1, 1, 1, 3
-1. 정답 없음
-
-
+<img src="assets/quiz.jpg" alt="Quiz" style="max-height: 50%;" />
 
 +++
 
-1. 1, 2, 2, 3 ( Read-Uncommitted )
-1. 1, 2, 1, 1 ( 정답 )
-1. 1, 2, 1, 3 ( Read-Committed )
-1. 1, 1, 1, 3 ( ??? )
-1. 정답 없음 ( ㅋ )
+정답 : 1, 2, 1, 1
 
 ---
 
