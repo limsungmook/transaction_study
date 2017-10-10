@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: h2
+logging:
+  level:
+    com: DEBUG
+    org.springframework.transaction: DEBUG
+    org.springframework.orm: DEBUG
