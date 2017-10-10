@@ -352,10 +352,12 @@ public void startLock(Long gluServerId) {
 
 ### @Async
 
-![async](assets/async.jpg)
+<img src="assets/async.jpg" alt="async" style="margin-top: 0px; width:80%;" />
 
-- 다른 쓰레드에서 트랜잭션이 실행된다
-- REQUIRED_NEW 와 유사하지만 호출한 트랜잭션이 Suspend 되지 않는 점이 다름
+<ol>
+<li style="font-size: 70%; color:white;">다른 쓰레드에서 트랜잭션이 실행된다</li>
+<li style="font-size: 70%; color:white;">REQUIRED_NEW 와 유사하지만 호출한 트랜잭션이 Suspend 되지 않는 점이 다름</li>
+</ol>
 
 +++?code=src/test/java/com/sungmook/transaction/async/TransactionTest.java&lang=java&title=@Async
 
@@ -393,8 +395,10 @@ public void startLock(Long gluServerId) {
 
 ### Non-Proxy call
 
-![Same Bean](assets/same_bean.jpg)
+<img src="assets/same_bean.jpg" alt="same_bean" style="margin-top: 0px; width:80%;" />
 
-- 간단하지만 자주 헷갈리는 부분
-- Spring AOP Proxy 는 Interface 를 통해서만 Proxy 를 실행한다
-- 즉, Annotation 이 무시될 수 있으니 주의할 것!
+<ol>
+<li style="font-size: 70%; color:white;">간단하지만 자주 헷갈리는 부분</li>
+<li style="font-size: 70%; color:white;">Spring AOP Proxy 는 Interface 를 통해서만 Proxy 를 실행한다</li>
+<li style="font-size: 70%; color:white;">즉, Annotation 이 무시될 수 있으니 주의할 것!</li>
+</ol>
