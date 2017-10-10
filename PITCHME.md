@@ -75,7 +75,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### JDBC Transaction
 
-+++?code=snippet/JdbcConnection.java&lang=java&title=JDBC 홈페이지 예제
++++?code=snippet/JdbcConnection.java&lang=java&title=JDBC Example
 
 @[2](AutoCommit(false) 는 곧 START TRANSACTION 임)
 @[4](정상 처리되면 commit)
@@ -86,7 +86,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### TransactionTemplate
 
-+++?code=snippet/TransactionTemplate.java&lang=java&title=TransactionTemplate 내부 구현
++++?code=snippet/TransactionTemplate.java&lang=java&title=TransactionTemplate Internal
 
 @[9](Spring 에서 DI 된 transactionManager 로부터 트랜잭션을 가져온다)
 @[12](콜백 클래스의 doInTransaction 을 실행한다)
@@ -97,7 +97,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### TransactionTemplate Usage
 
-+++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java&title=간단한 TransactionTemplate 사용법
++++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java&title=Simple TransactionTemplate usage
 
 @[72-73, 76-80](TransactionAutoConfiguration 에 의해 DI 받은 transactionTemplate 을 통해 실행)
 
@@ -105,7 +105,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### @Transactional
 
-+++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=간단한 @Transactional 사용법
++++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=Simple @Transactional usage
 
 @[70-73](@Transactional 적용)
 
@@ -126,7 +126,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
   1. 컨텍스트에 여러개의 DB 트랜잭션이 있을 수 있다(open-in-view, PersistenceContextType.EXTENDED)
 
 
----------
+---
 
 ### EntityManager
 
@@ -134,7 +134,6 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 - 실제 수행은 SharedEntityManagerInvocationHandler 를 통해 Proxy 로 수행된다
 - EntityManagerFactory 에 의해 트랜잭션 당 하나가 만들어진다
 - Session 은 SessionFactory 에 의해 생성되며 DataSource 를 통한 Connection 을 갖고있다
-
 
 ---
 
