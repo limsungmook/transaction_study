@@ -95,6 +95,8 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 @[14-28](Exception 발생 시 롤백을 진행한다)
 @[29](Exception 이 발생하지 않았으면 commit 한다)
 
++++
+
 +++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java&title=TransactionTemplate Usage
 
 @[72-73, 76-80](TransactionAutoConfiguration 에 의해 DI 받은 transactionTemplate 을 통해 실행)
