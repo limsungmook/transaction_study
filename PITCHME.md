@@ -5,9 +5,9 @@
 
 
 #### 사전지식 - Quiz
-<span style="font-size: 80%">MySQL 쿼리 실행 결과를 맞춰주세요</span>
 
-<img src="assets/quiz.jpg" alt="Quiz" style="max-height: 50%;" />
+<img src="assets/quiz.jpg" alt="Quiz" style="margin-top: 0px;" />
+<span style="font-size: 80%">MySQL 쿼리 실행 결과를 맞춰주세요</span>
 
 +++
 
