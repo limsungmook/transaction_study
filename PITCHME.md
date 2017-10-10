@@ -13,7 +13,7 @@
 1. 1, 1, 1, 3
 1. 정답 없음
 
-![Quiz](assets/quiz.jpg=100px)
+<img src="assets/quiz.jpg" alt="Quiz" style="width: 50%;" />
 
 
 +++
