@@ -18,12 +18,12 @@
 
 ### ANSI Isolation Levels
 
-| Isolation level | Dirty reads | Non-repeatable reads | Phantoms | Read Operation |
-| ---- | :------: | :--------: | :--------: | :--------: |
-| Read Uncommitted | may occur | may occur | may occur | not used |
-| Read Committed | don't occur | may occur | may occur | during statement |
-| Repeatable Read | don't occur | don't occur | may occur | until commit |
-| Serializable | don't occur | don't occur | don't occur | until commit |
+Isolation level | Dirty reads | Non-repeatable reads | Phantoms | Read Operation
+---- | :------: | :--------: | :--------: | :--------:
+Read Uncommitted | may occur | may occur | may occur | not used
+Read Committed | don't occur | may occur | may occur | during statement
+Repeatable Read | don't occur | don't occur | may occur | until commit
+Serializable | don't occur | don't occur | don't occur | until commit
 
 - ANSI 표준에서의 네 가지 Isolation
 - 성능 : 위에서 아래 방향 순서로 좋다
@@ -32,7 +32,7 @@
 +++
 
 ### Isolation - Read Uncommitted
-Read Uncommitted - 트랜잭션 시작과 종료 사이에 CUD 가 발생했을 때, 즉 commit 하지 않고 실제 DB 에 반영되지 않았더라도 다른 세션에서 *변경중인 데이터*를 읽을 수 있다. 트랜잭션이 시작되면 commit 명령을 날리기 전엔 변경사항들이 snapshot 에 저장이 되는데, 이 snapshot 에 있는 데이터를 읽을 수 있다는 의미다. 아래 예제를 보자.
+트랜잭션 시작과 종료 사이에 CUD 가 발생했을 때, 즉 commit 하지 않고 실제 DB 에 반영되지 않았더라도 다른 세션에서 *변경중인 데이터*를 읽을 수 있다. 트랜잭션이 시작되면 commit 명령을 날리기 전엔 변경사항들이 snapshot 에 저장이 되는데, 이 snapshot 에 있는 데이터를 읽을 수 있다는 의미다. 아래 예제를 보자.
 
 
 ![Read Uncommitted](assets/read_uncommitted.jpg)
