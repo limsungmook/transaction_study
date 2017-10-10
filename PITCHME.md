@@ -113,27 +113,27 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### @Transactional Life Cycle - Database Transaction
 
-  1. @Transactional 어노테이션은 하나의 DB 트랜잭션 범위를 정의한다
-  1. DB 트랜잭션은 Persistent Context 내에서 수행된다
+1. @Transactional 어노테이션은 하나의 DB 트랜잭션 범위를 정의한다
+1. DB 트랜잭션은 Persistent Context 내에서 수행된다
 
 ---
 
 ### @Transactional Life Cycle - Persistent Context
 
-  1. Persistent Context 는 하나의 EntityManager 로 수행되는 범위다
-  1. (EntityManager 는 내부적으로 하나의 하이버네이트 Session 을 사용함)
-  1. 자바 오브젝트의 변화를 추적하고 변경된 내용을 DB 에 반영하는 역할을 수행함
-  1. 컨텍스트에 여러개의 DB 트랜잭션이 있을 수 있다(open-in-view, PersistenceContextType.EXTENDED)
+1. Persistent Context 는 하나의 EntityManager 로 수행되는 범위다
+1. (EntityManager 는 내부적으로 하나의 하이버네이트 Session 을 사용함)
+1. 자바 오브젝트의 변화를 추적하고 변경된 내용을 DB 에 반영하는 역할을 수행함
+1. 컨텍스트에 여러개의 DB 트랜잭션이 있을 수 있다(open-in-view, PersistenceContextType.EXTENDED)
 
 
 ---
 
 ### EntityManager
 
-- Hibernate 를 Provider 로 사용한다면 1:1로 Session 을 갖고있다
-- 실제 수행은 SharedEntityManagerInvocationHandler 를 통해 Proxy 로 수행된다
-- EntityManagerFactory 에 의해 트랜잭션 당 하나가 만들어진다
-- Session 은 SessionFactory 에 의해 생성되며 DataSource 를 통한 Connection 을 갖고있다
+1. Hibernate 를 Provider 로 사용한다면 1:1로 Session 을 갖고있다
+1. 실행은 SharedEntityManagerInvocationHandler 를 통해 Proxy 로 수행된다
+1. EntityManagerFactory 에 의해 트랜잭션 당 하나씩 만들어진다
+1. Session 은 SessionFactory 에 의해 생성되며 DataSource 를 통한 Connection 을 갖고있다
 
 ---
 
@@ -343,7 +343,7 @@ public void startLock(Long gluServerId) {
 
 @[54-62] 현재 쓰레드의 트랜잭션 commit 후 Callback 을 실행한다
 
-------------------------
+---
 
 ### @Async + @TransactionalEventListener
 
@@ -357,7 +357,7 @@ public void startLock(Long gluServerId) {
 @[68-72] Interface 에 @Async 와 @TransactionalEventListener 그리고 메소드 인자로 해당 Event 가 있어야한다
 @[81-84] Event Payload 로부터 데이터를 꺼내와서 비지니스 로직 실행
 
--------------------
+---
 
 
 ### Non-Proxy call
