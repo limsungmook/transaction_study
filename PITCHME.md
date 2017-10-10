@@ -76,65 +76,21 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ## JDBC Transaction
 
-```java
-try {
-    dbConnection.setAutoCommit(false);
-    //SQL insert, update, delete statement
-    dbConnection.commit();
-} catch (SQLException e) {
-    dbConnection.rollback();
-} finally {
-    dbConnection.close();
-}
-```
++++?code=snippet/JdbcConnection.java&lang=java&title=JdbcConnection
 
 ---
 
 
 ## TransactionTemplate
 
-```
-public class TransactionTemplate {
-    ...
-    @Override
-    public <T> T execute(TransactionCallback<T> action) throws TransactionException {
-        if (this.transactionManager instanceof CallbackPreferringPlatformTransactionManager) {
-            return ((CallbackPreferringPlatformTransactionManager) this.transactionManager).execute(this, action);
-        }
-        else {
-            TransactionStatus status = this.transactionManager.getTransaction(this);
-            T result;
-            try {
-                result = action.doInTransaction(status);
-            }
-            catch (RuntimeException ex) {
-                // Transactional code threw application exception -> rollback
-                rollbackOnException(status, ex);
-                throw ex;
-            }
-            catch (Error err) {
-                // Transactional code threw error -> rollback
-                rollbackOnException(status, err);
-                throw err;
-            }
-            catch (Throwable ex) {
-                // Transactional code threw unexpected exception -> rollback
-                rollbackOnException(status, ex);
-                throw new UndeclaredThrowableException(ex, "TransactionCallback threw undeclared checked exception");
-            }
-            this.transactionManager.commit(status);
-            return result;
-        }
-    }
-    ...
-}
-```
++++?code=snippet/TransactionTemplate.java&lang=java&title=TransactionTemplate
+
 Spring 에서 DI 된 transactionManager 로부터 트랜잭션을 가져온다
 콜백 클래스의 doInTransaction 을 실행한다
 Exception 발생 시 롤백을 진행한다
 Exception 이 발생하지 않았으면 commit 한다
 
-+++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java&title=TransactionTemplate
++++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java&title=TransactionTemplate Usage
 
 사용 예제
 
