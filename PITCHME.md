@@ -241,9 +241,9 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 <img src="assets/implicit_transaction.jpg" alt="Implicit_transaction" style="margin-top: 0px; width:80%;" />
 
 <ol>
-<li style="font-size: 70%; color:white;">미리 시작된 트랜잭션이 있을 때 참여한다</span>
-<li style="font-size: 70%; color:white;">Bean2 는 별도의 Proxy 로 진행되지 않는다</span>
-<li style="font-size: 70%; color:white;">method2 에서 Exception 이 발생해도 catch 만 하면 Rollback 되지 않는다</span>
+<li style="font-size: 70%; color:white;">미리 시작된 트랜잭션이 있을 때 참여한다</li>
+<li style="font-size: 70%; color:white;">Bean2 는 별도의 Proxy 로 진행되지 않는다</li>
+<li style="font-size: 70%; color:white;">method2 에서 Exception 이 발생해도 catch 만 하면 Rollback 되지 않는다</li>
 </ol>
 
 +++?code=src/test/java/com/sungmook/transaction/implicit_transaction/TransactionTest.java&lang=java&title=REQUIRED @Transactional
@@ -254,20 +254,24 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 
 ### SUPPORTS
 
-![Supports](assets/supports.jpg)
+<img src="assets/supports.jpg" alt="supports" style="margin-top: 0px; width:80%;" />
 
-- 미리 시작된 트랜잭션이 있으면 참여하고 없으면 트랜잭션 없이 실행된다
-- 트랜잭션은 없지만 EntityManager, Connection 은 공유된다
+<ol>
+<li style="font-size: 70%; color:white;">미리 시작된 트랜잭션이 있으면 참여하고 없으면 트랜잭션 없이 실행된다</li>
+<li style="font-size: 70%; color:white;">트랜잭션은 없지만 EntityManager, Connection 은 공유된다</li>
+</ol>
 
 ---
 
 ### REQUIRES_NEW
 
-![Requires_new](assets/required_new.jpg)
+<img src="assets/required_new.jpg" alt="required_new" style="margin-top: 0px; width:80%;" />
 
-- 항상 새로운 트랜잭션을 시작한다
-- 이미 진행중인 트랜잭션은 보류(suspend) 시킨다(Holder 에서 제거)
-- method1 에서 Exception 이 발생해 롤백해도 method2 는 롤백하지 않는다
+<ol>
+<li style="font-size: 70%; color:white;">항상 새로운 트랜잭션을 시작한다</li>
+<li style="font-size: 70%; color:white;">이미 진행중인 트랜잭션은 보류(suspend) 시킨다(Holder 에서 제거)</li>
+<li style="font-size: 70%; color:white;">method1 에서 Exception 이 발생해 롤백해도 method2 는 롤백하지 않는다</li>
+</ol>
 
 +++?code=src/test/java/com/sungmook/transaction/propagation_new/TransactionTest.java&lang=java&title=REQUIRED @Transactional
 
@@ -278,26 +282,33 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 
 ### NOT_SUPPORTED
 
-![not supported](assets/not_supported.jpg)
+<img src="assets/not_supported.jpg" alt="not_supported" style="margin-top: 0px; width:80%;" />
 
-- 어떠한 경우에도 트랜잭션 없이 진행한다
-- 이미 진행중인 트랜잭션은 보류(suspend) 시킨다(Holder 에서 제거)
+<ol>
+<li style="font-size: 70%; color:white;">어떠한 경우에도 트랜잭션 없이 진행한다</li>
+<li style="font-size: 70%; color:white;">이미 진행중인 트랜잭션은 보류(suspend) 시킨다(Holder 에서 제거)</li>
+</ol>
 
 ---
 
 ### MANDATORY
 
-- 트랜잭션 없이 실행되면 Exception 을 발생시킨다
+<img src="assets/mandatory.jpg" alt="mandatory" style="margin-top: 0px; width:80%;" />
 
-![Mandatory](assets/mandatory.jpg)
+<ol>
+<li style="font-size: 70%; color:white;">트랜잭션 없이 실행되면 Exception 을 발생시킨다</li>
+</ol>
+
 
 ---
 
 ### NEVER
 
-![never](assets/never.jpg)
+<img src="assets/never.jpg" alt="never" style="margin-top: 0px; width:80%;" />
 
-- 트랜잭션 내에서 실행되면 Exception 을 발생시킨다
+<ol>
+<li style="font-size: 70%; color:white;">트랜잭션 내에서 실행되면 Exception 을 발생시킨다</li>
+</ol>
 
 
 ---
@@ -306,11 +317,14 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 
 
 ![nested](assets/nested.jpg)
+<img src="assets/nested.jpg" alt="nested" style="margin-top: 0px; width:80%;" />
 
-- Hibernate 에선 지원하지 않음
-- 외부 트랜잭션에 속한 내부 트랜잭션 생성
-- 외부 트랜잭션에 SavePoint 를 두고 내부 트랜잭션에서 Rollback 시 SavePoint 를 원복
-- 외부 트랜잭션이 종료돼야 내부 트랜잭션도 commit
+<ol>
+<li style="font-size: 70%; color:white;">Hibernate 에선 지원하지 않음</li>
+<li style="font-size: 70%; color:white;">외부 트랜잭션에 속한 내부 트랜잭션 생성</li>
+<li style="font-size: 70%; color:white;">외부 트랜잭션에 SavePoint 를 두고 내부 트랜잭션에서 Rollback 시 SavePoint 를 원복</li>
+<li style="font-size: 70%; color:white;">외부 트랜잭션이 종료돼야 내부 트랜잭션도 commit</li>
+</ol>
 
 
 ---
