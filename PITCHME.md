@@ -93,7 +93,7 @@ try {
 
 ## TransactionTemplate
 
-```java
+```
 public class TransactionTemplate {
     ...
     @Override
