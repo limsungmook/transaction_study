@@ -350,6 +350,17 @@ public void startLock(Long gluServerId) {
 
 ---
 
+### readOnly
+
+1. readOnly 는 Connection.setReadOnly(true) 를 호출한다
+1. DB에 보내는 Hint 일 뿐이며 설정되어 있어도 Writable 할 수도 있다
+
++++?code=src/test/java/com/sungmook/transaction/read_only/TransactionTest.java&lang=java&title=ReadOnly
+
+호출하는 트랜잭션이 writable 하기 때문에 read-only 는 ignore 된다
+
+---
+
 ### @Async
 
 <img src="assets/async.jpg" alt="async" style="margin-top: 0px; width:80%;" />
