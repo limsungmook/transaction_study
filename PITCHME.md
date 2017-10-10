@@ -78,21 +78,26 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 +++?code=snippet/JdbcConnection.java&lang=java&title=JdbcConnection
 
----
+@[2](AutoCommit(false) 는 곧 START TRANSACTION 임)
+@[4](정상 처리되면 commit)
+@[5-6](문제 발생시 Rollback)
+@[8](성공,실패 상관 없이 커넥션은 꼭 닫아줘야한다)
+
+----
 
 
 ## TransactionTemplate
 
 +++?code=snippet/TransactionTemplate.java&lang=java&title=TransactionTemplate
 
-Spring 에서 DI 된 transactionManager 로부터 트랜잭션을 가져온다
-콜백 클래스의 doInTransaction 을 실행한다
-Exception 발생 시 롤백을 진행한다
-Exception 이 발생하지 않았으면 commit 한다
+@[9](Spring 에서 DI 된 transactionManager 로부터 트랜잭션을 가져온다)
+@[12](콜백 클래스의 doInTransaction 을 실행한다)
+@[14-28](Exception 발생 시 롤백을 진행한다)
+@[29](Exception 이 발생하지 않았으면 commit 한다)
 
 +++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java&title=TransactionTemplate Usage
 
-사용 예제
+@[72-73, 76-80](TransactionAutoConfiguration 에 의해 DI 받은 transactionTemplate 을 통해 실행)
 
 ---
 
