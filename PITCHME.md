@@ -19,11 +19,11 @@
 ### ANSI Isolation Levels
 
 | Isolation level | Dirty reads | Non-repeatable reads | Phantoms | Read Operation |
-| ---- | ---- | ---- | ---- |  ---- |
-| Read Uncommitted | may occur   | may occur |  may occur   | not used |
-| Read Committed     | don't occur | may occur |  may occur   | during statement |
-| Repeatable Read     | don't occur | don't occur |  may occur  | until commit |
-| Serializable              | don't occur  | don't occur |  don't occur | until commit |
+| ---- | :------: | :--------: | :--------: | :--------: |
+| Read Uncommitted | may occur | may occur | may occur | not used |
+| Read Committed | don't occur | may occur |  may occur | during statement |
+| Repeatable Read  | don't occur | don't occur |  may occur  | until commit |
+| Serializable | don't occur  | don't occur |  don't occur | until commit |
 
 - ANSI 표준에서의 네 가지 Isolation
 - 성능 : 위에서 아래 방향 순서로 좋다
