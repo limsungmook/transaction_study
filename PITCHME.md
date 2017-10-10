@@ -139,7 +139,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### Transaction Manager - Responsibility
 
-두 가지 책임
+두 가지 책임이 있다
 1. 새로운 EntityManager 를 생성할 것인가, 아니면 Share 해서 사용할 것인가
 1. 새로운 DB 트랜잭션을 시작해야 하는가?
 
@@ -149,52 +149,64 @@ Transaction Aspect 의 'before' 에서 호출되어 위 사항을 결정한다
 
 ### Transaction Manager - Start transaction
 
-트랜잭션이 시작되면 다음을 진행한다
+트랜잭션이 시작될 때 아래에 대한 책임이 있다
 1. 새로운 EntityManager 를 만든다
 1. EntityManager 를 지금 속한 쓰레드에 Bind 한다
 1. DB Connection pool(DataSource)로부터 Connection 을 가져온다
 1. Connection 을 현재 쓰레드에 Bind 한다
 
+---
+
 ### TransactionSynchronizationManager - Bind properties
+
 1. TransactionManager 에서 가져온 두 객체(EntityManager, Connection)을 ThreadLocal 에 저장
 1. EntityManager Proxy(SharedEntityManagerInvocationHandler에서 invoke) 에서도 공유해서 사용
 
 ---
 
-### Transaction Aspect ( TransactionInterceptor )
+### Transaction Aspect (TransactionInterceptor)
 
-@Transactional 이 설정된 Method 를 around 로 invoke 한다
-비즈니스 로직 수행 전(before) 에 새로운 트랜잭션을 수행할지, 기존 트랜잭션에 합류할지 정한다(TransactionManager 에 위임)
-비즈니스 로직 수행 후(after) 에 트랜잭션을 commit 할지 rollback 할지 결정한다
+1. @Transactional 이 설정된 Method 를 around 로 invoke 한다
+1. 비즈니스 로직 수행 전(before) 에 새로운 트랜잭션을 수행할지, 기존 트랜잭션에 합류할지 정한다(TransactionManager 에 위임)
+1. 비즈니스 로직 수행 후(after) 에 트랜잭션을 commit 할지 rollback 할지 결정한다
 
 ---
 
 ### Holders
 
-- EntityManagerHolder, ConnectionHolder
-- 쓰레드에서 공유(Share) 해서 사용하는 EntityManager, Connection 를 담아두는 홀더
-- Propagation.REQUIRED_NEW, SUPPORTS 에선 두 홀더에서 데이터를 잠시 제거한다
-- Open-in-view Interceptor 에서 하는 일은 미리 Holder 를 설정해놓고 Request 종료될때 제거함
+1. EntityManagerHolder, ConnectionHolder
+1. 쓰레드에서 공유(Share) 해서 사용하는 EntityManager, Connection 를 담아두는 홀더
+1. Propagation.REQUIRED_NEW, NOT_SUPPORTS 에선 두 홀더에서 데이터를 잠시 제거한다
+1. Open-in-view Interceptor 에서 하는 일은 미리 Holder 를 설정해놓고 Request 종료될때 제거함
 
 ---
 
 ### @EnableTransactionManagement
 
-- Annotation 으로 설정된 @Transactional 을 활성화한다
-- 기본은 Spring Proxy AOP, 즉 JDK 기본 Interface AOP 를 제공한다(설정으로 AspectJ 가능)
-- 내부 클래스 흐름은 @EnableTransactionManagement -> TransactionManagementConfigurationSelector -> ProxyTransactionManagementConfiguration -> BeanFactoryTransactionAttributeSourceAdvisor
+1. Annotation 으로 설정된 @Transactional 을 활성화한다
+1. 기본은 Spring Proxy AOP, 즉 JDK 기본 Interface AOP 를 제공한다(설정으로 AspectJ 가능)
+1. 내부 클래스 흐름은 @EnableTransactionManagement -> TransactionManagementConfigurationSelector -> ProxyTransactionManagementConfiguration -> BeanFactoryTransactionAttributeSourceAdvisor
 에서 PointCut 에 해당하는 @Transactional 정보를 갖고 있는 AnnotationTransactionAttributeSource 와 실제 Advice 를 수행하는 TransactionalInterceptor 가 Advisor 수행된다
 
 
 ---
 
 ### Open In View
-Hibernate 에선 Open Session In View 라고 하지만 JPA 에선 EntityManager 를 사용하기 때문에 OpenEntityManagerInView 라고 함. (JpaBaseConfiguration 참고)
 
-쓰레드 마다 EntityManager 가 새롭게 생성된다. 각 Entity 도 실제로는 HibernateProxy 를 중간에 놓고 작업을 진행하게 되는데, 이때 만약 LazyLoading 이 걸려 있다면 어떻게 될까? 사용자의 친구들을 갖고 오는 메소드가 있을 때 관계를 가져오는 user.getFriends() 메소드는 이 Proxy 에 의해서 실제 불러들일 때만 DB 에서 Select 를 하게 된다. 이때 생성된 Proxy 에서 사용하는 게 현재 쓰레드에 바인딩 된 EntityManager 의 getReference(Friend.class, PK) 이다. 트랜잭션이 종료되면 EntityManager 는 Close 되게 되는데, 이래서 트랜잭션 외부에서 관계가 설정된 데이터를 읽어올 때 LazyInitializationException 이 뜨게 되는 것이다.
-그럼 OpenInView 옵션이 켜져 있으면 어떨게 될까?
-OpenInView 가 켜져있으면 OpenEntityManagerInViewInterceptor 가 등록된다. 이 인터셉터는 요청(request) 시작 전에 미리 직접 EntityManager 를 생성하고 EntityManagerHolder 에 이 엔티티 매니저를 넣어놓는다. 이 홀더는 실제 트랜잭션 매니저에서 그대로 활용된다. 요청이 종료되면 여기서 생성한 EntityManager 를 반환한다.
+1. Hibernate : Open Session In View. JPA : Open EntityManager In View
+1. Entity 접근 시 실제로는 HibernateProxy 를 통해 AOP 접근함
+1. LazyLoading 은 Proxy 에 의해서 실제 불러들일 때만 DB 에서 Select 를 함
+1. 이때 Proxy 에서 사용하는 것이 현재 쓰레드에 바인딩 된 EntityManager 의 getReference({RelationClass.class}, PK)
+1. 트랜잭션 외부에서 관계가 설정된 데이터를 읽어올 때 LazyInitializationException 이 뜸
+1. OpenInView 가 켜지면 OpenEntityManagerInViewInterceptor 가 등록됨
 
+---
+
+### OpenEntityManagerInViewInterceptor
+
+1. 요청(request) 시작 전에 미리 직접 EntityManager 를 생성하고 EntityManagerHolder 에 EntityManager 를 저장
+1. 홀더는 실제 트랜잭션 매니저에서 그대로 활용.
+1. 요청(request) 종료 시 생성한 EntityManager 를 반환(close, remove)
 
 ---
 
