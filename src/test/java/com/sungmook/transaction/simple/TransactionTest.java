@@ -67,7 +67,7 @@ public class TransactionTest {
         PostRepository postRepository;
 
         @Override
-        @Transactional(propagation = Propagation.REQUIRED)
+        @Transactional
         public void save(User user, boolean firePostException) {
             Post post = Post.builder().content("Hello World").user(user).build();
             postRepository.save(post);

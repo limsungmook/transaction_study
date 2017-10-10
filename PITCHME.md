@@ -105,7 +105,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 +++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=Simple @Transactional
 
-스프링 컨테이너가 초기화 되는 시점에 @Transactional 포인트컷으로 Proxy 가 생성된다
+@[70-73](@Transactional 적용)
 
 ---
 
