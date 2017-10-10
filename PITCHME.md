@@ -30,12 +30,7 @@ MySQL 쿼리 실행 결과를 맞춰주세요
 
 ![Read Uncommitted](assets/read_uncommitted.jpg)
 
-### Isolation - Read Uncommitted
-
-<span style="font-size:0.6em; color:gray">
-트랜잭션 시작과 종료 사이에 CUD 가 발생했을 때, 즉 commit 하지 않고 실제 DB 에 반영되지 않았더라도 다른 세션에서 *변경중인 데이터*를 읽을 수 있다. 트랜잭션이 시작되면 commit 명령을 날리기 전엔 변경사항들이 snapshot 에 저장이 되는데, 이 snapshot 에 있는 데이터를 읽을 수 있다는 의미다. 아래 예제를 보자.
-</span>
-
+다른 세션에서 *변경중인 데이터*를 읽을 수 있다 (트랜잭션 진행 중 commit 하지 않은 변경사항 READ)
 
 +++
 
@@ -43,10 +38,7 @@ MySQL 쿼리 실행 결과를 맞춰주세요
 
 ![Read Committed](assets/read_committed.jpg)
 
-<span style="font-size:0.6em;">
-트랜잭션 시작과 종료 사이에 CUD 가 발생해도 다른 세션에선 트랜잭션 시작 전의 데이터를 읽어온다. 즉, 아무리 데이터를 변경해도 이 데이터는 snapshot 에만 있기 때문에 다른 세션에선 트랜잭션의 유무는 무시하고 실제 DB 에 있는 데이터만 읽어오게 된다.
-</span>
-
+트랜잭션 시작 전의 데이터를 읽어온다.
 
 +++
 
@@ -54,7 +46,7 @@ MySQL 쿼리 실행 결과를 맞춰주세요
 
 ![Repeatable Read](assets/repeatable_read.jpg)
 
-마치 cache 처럼, 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동일한 데이터가 나온다. 그럼 Phantom Read 도 해당이 안되는 것 아닌가? 다른 세션에서의 UPDATE 시에는 확실하게 동일한 read 를 보장하지만 다른 세션에서 insert 했을 경우엔 select 시 다른 count 가 나오게 된다.
+cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동일한 데이터가 나온다.
 
 +++
 
@@ -62,7 +54,8 @@ MySQL 쿼리 실행 결과를 맞춰주세요
 
 ![Repeatable Read](assets/serializable.jpg)
 
-가장 강력한 안정성을 갖고 있다.
+가장 강력한 안정성을 갖고 있다
+트랜잭션 내에선 Read 에도 자동으로 Lock 이 걸린다
 
 ---
 
