@@ -374,7 +374,7 @@ public void startLock(Long gluServerId) {
 
 +++?code=src/test/java/com/sungmook/transaction/async_sync_manager/TransactionTest.java&lang=java&title=@Async
 
-@[54-62] 현재 쓰레드의 트랜잭션 commit 후 Callback 을 실행한다
+@[54-62](현재 쓰레드의 트랜잭션 commit 후 Callback 을 실행한다)
 
 ---
 
@@ -386,9 +386,9 @@ public void startLock(Long gluServerId) {
 
 +++?code=src/test/java/com/sungmook/transaction/async_transaction_event/TransactionTest.java&lang=java&title=@Async
 
-@[56-60] Emit 하지만 실제 이 시점에 다른 메소드가 수행되진 않는다
-@[68-72] Interface 에 @Async 와 @TransactionalEventListener 그리고 메소드 인자로 해당 Event 가 있어야한다
-@[81-84] Event Payload 로부터 데이터를 꺼내와서 비지니스 로직 실행
+@[56-60](Emit 하지만 실제 이 시점에 다른 메소드가 수행되진 않는다)
+@[68-72](Interface 에 @Async 와 @TransactionalEventListener 그리고 메소드 인자로 해당 Event 가 있어야한다)
+@[81-84](Event Payload 로부터 데이터를 꺼내와서 비지니스 로직 실행)
 
 ---
 
