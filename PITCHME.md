@@ -30,7 +30,10 @@ MySQL 쿼리 실행 결과를 맞춰주세요
 
 ![Read Uncommitted](assets/read_uncommitted.jpg)
 
-다른 세션에서 *변경중인 데이터*를 읽을 수 있다 (트랜잭션 진행 중 commit 하지 않은 변경사항 READ)
+<span style="font-size: 80%">
+다른 세션에서 *변경중인 데이터*를 읽을 수 있다 <br />
+(트랜잭션 진행 중 commit 하지 않은 변경사항 READ)
+</span>
 
 +++
 
@@ -38,15 +41,18 @@ MySQL 쿼리 실행 결과를 맞춰주세요
 
 ![Read Committed](assets/read_committed.jpg)
 
+<span style="font-size: 80%">
 트랜잭션 시작 전의 데이터를 읽어온다.
-
+</span>
 +++
 
 ### Isolation - Repeatable Read
 
 ![Repeatable Read](assets/repeatable_read.jpg)
 
+<span style="font-size: 80%">
 cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동일한 데이터가 나온다.
+</span>
 
 +++
 
@@ -54,8 +60,10 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ![Repeatable Read](assets/serializable.jpg)
 
+<span style="font-size: 80%">
 가장 강력한 안정성을 갖고 있다
-트랜잭션 내에선 Read 에도 자동으로 Lock 이 걸린다
+<br/>트랜잭션 내에선 Read 에도 자동으로 Lock 이 걸린다(InnoDB, Oracle)
+</span>
 
 ---
 
