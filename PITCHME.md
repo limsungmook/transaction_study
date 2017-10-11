@@ -184,8 +184,8 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 
 ### @EnableTransactionManagement
 
-1. Annotation 으로 설정된 @Transactional 을 활성화한다
-1. 기본은 Spring Proxy AOP, 즉 JDK 기본 Interface AOP 를 제공한다(설정으로 AspectJ 가능)
+1. Annotation 으로 설정된 @Transactional 활성화
+1. 기본은 Spring Proxy AOP, 즉 JDK 기본 Interface AOP 를 제공(설정으로 AspectJ 가능)
 1. 내부 클래스 흐름은 <span style="font-size:50%">@EnableTransactionManagement -> TransactionManagementConfigurationSelector -> ProxyTransactionManagementConfiguration -> BeanFactoryTransactionAttributeSourceAdvisor
 에서 PointCut 에 해당하는 @Transactional 정보를 갖고 있는 AnnotationTransactionAttributeSource 와 실제 Advice 를 수행하는 TransactionalInterceptor 가 Advisor 수행된다</span>
 
@@ -196,12 +196,13 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 
 1. Entity 접근 시 실제로는 HibernateProxy 를 통해 AOP 접근함
 1. LazyLoading 은 Proxy 에 의해서 실제 불러들일 때만 DB 에서 Select 를 함
-1. 이때 Proxy 에서 사용하는 것이 현재 쓰레드에 바인딩 된 EntityManager 의 getReference({RelationClass.class}, PK)
-1. 트랜잭션 외부에서 관계가 설정된 데이터를 읽어올 때 LazyInitializationException 이 뜸
+1. Proxy 에서 현재 쓰레드에 바인딩 된 EntityManager의 getReference({RelationClass.class}, PK) 호출
+1. 트랜잭션 외부에서 관계가 설정된 데이터를 읽어올 때 LazyInitializationException 발생
 
 ---
 
-### OpenEntityManagerInViewInterceptor(Open-in-view)
+### OpenEntityManagerInViewInterceptor
+(Open-in-view)
 
 1. Hibernate : Open Session In View. JPA : Open EntityManager In View
 1. 요청(request) 시작 전에 미리 직접 EntityManager 를 생성하고 EntityManagerHolder 에 EntityManager 를 저장
