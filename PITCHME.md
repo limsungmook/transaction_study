@@ -273,7 +273,7 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 <li style="font-size: 70%; color:white;">method1 에서 Exception 이 발생해 롤백해도 method2 는 롤백하지 않는다</li>
 </ol>
 
-+++?code=src/test/java/com/sungmook/transaction/propagation_new/TransactionTest.java&lang=java&title=REQUIRED @Transactional
++++?code=src/test/java/com/sungmook/transaction/propagation_new/TransactionTest.java&lang=java&title=REQUIRES_NEW @Transactional
 
 @[102-108](userService 에서 예외가 발생해도 postService 데이터는 보존됨)
 @[113-119](postService 에서 예외가 발생해도 userService 데이터는 보존됨)
@@ -383,7 +383,7 @@ public void startLock(Long gluServerId) {
 - 실제 TransactionManager 에서 내부적으로 사용되는 TransactionSynchronizationManager 를 통해 직접 제어
 - commit 된 후 실행될 callback 을 등록할 수 있다
 
-+++?code=src/test/java/com/sungmook/transaction/async_sync_manager/TransactionTest.java&lang=java&title=@Async
++++?code=src/test/java/com/sungmook/transaction/async_sync_manager/TransactionTest.java&lang=java&title=@Async + TransactionSynchronizationManager
 
 @[54-62](현재 쓰레드의 트랜잭션 commit 후 Callback 을 실행한다)
 
@@ -395,7 +395,7 @@ public void startLock(Long gluServerId) {
 - 코드에 트랜잭션 관련 로직을 제거하고 AOP 로 깔끔하게 코딩 가능
 - Publisher 에 Event 를 Emit 하면 트랜잭션이 Commit 되었을 때 해당 Event 를 Listen 하던 메소드가 실행된다
 
-+++?code=src/test/java/com/sungmook/transaction/async_transaction_event/TransactionTest.java&lang=java&title=@Async
++++?code=src/test/java/com/sungmook/transaction/async_transaction_event/TransactionTest.java&lang=java&title=@Async + @TransactionalEventListener
 
 @[56-60](Emit 하지만 실제 이 시점에 다른 메소드가 수행되진 않는다)
 @[68-72](Interface 에 @Async 와 @TransactionalEventListener 그리고 메소드 인자로 해당 Event 가 있어야한다)
@@ -416,4 +416,4 @@ public void startLock(Long gluServerId) {
 
 ---
 
-# 감사합니다
+## 감사합니다
