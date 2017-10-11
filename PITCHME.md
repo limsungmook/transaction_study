@@ -357,8 +357,8 @@ public void startLock(Long gluServerId) {
 
 +++?code=src/test/java/com/sungmook/transaction/read_only/TransactionTest.java&lang=java&title=ReadOnly
 
-@[54-65](여기서 트랜잭션이 시작되면 read-only 하지만 외부 트랜잭션에서 실행되면 ignore 된다)
-
+@[54-65](여기서 트랜잭션이 시작되면 read-only. 하지만 외부 트랜잭션에서 실행되면 ignore 된다)
+@[36-96]()
 ---
 
 ### @Async
