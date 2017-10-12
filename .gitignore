@@ -77,4 +77,6 @@ fabric.properties
 
 /.idea/
 .idea/inspectionProfiles/
-src/test/resources/
+
+**.iml
+
