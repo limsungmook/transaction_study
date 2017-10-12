@@ -150,7 +150,8 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 ### Transaction Manager - Start transaction
 
 트랜잭션이 시작될 때 아래에 대한 책임이 있다
-1. 새로운 EntityManager 를 만든다
+1. Holder 에 EntityManager, Connection 이 있으면 그대로 사용한다
+1. 없으면 새로운 EntityManager 를 만든다
 1. EntityManager 를 지금 속한 쓰레드에 Bind 한다
 1. DB Connection pool(DataSource)로부터 Connection 을 가져온다
 1. Connection 을 현재 쓰레드에 Bind 한다
@@ -159,7 +160,7 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 
 ### TransactionSynchronizationManager - Bind properties
 
-1. TransactionManager 에서 가져온 두 객체(EntityManager, Connection)를 ThreadLocal 에 저장
+1. TransactionManager 에서 가져온 두 ResourceHolder(EntityManager, Connection)를 ThreadLocal 에 저장
 1. EntityManager Proxy(SharedEntityManagerInvocationHandler에서 invoke) 에서도 공유해서 사용
 1. Open-in-view Interceptor 에서도 공유해서 사용
 
