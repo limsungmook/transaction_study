@@ -1,4 +1,4 @@
-package com.sungmook.transaction.simple;
+package com.sungmook.transaction.entity_manager;
 
 import com.sungmook.transaction.PostService;
 import com.sungmook.transaction.UserService;
@@ -18,10 +18,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -41,14 +41,18 @@ public class TransactionTest {
         PostService postService;
         @Autowired
         UserRepository userRepository;
+        // EntityManagerFactory 가 inject 됨
+        @PersistenceContext
+        EntityManager entityManager;
 
         @Override
-        @Transactional
         public void save(boolean fireUserException, boolean firePostException) {
 
             User user1 = User.builder().name("user 1").build();
             User user2 = User.builder().name("user 2").build();
 
+            // AbstractEntityManagerImpl 의 getProperties 를 Break Point 로 찍어서 확인해보면 EntityManager 의 실제 인스턴스가 어떤 것인지 볼 수 있다
+            entityManager.getProperties();
             userRepository.save(user1);
             userRepository.save(user2);
             try {
@@ -67,10 +71,12 @@ public class TransactionTest {
     static class PostServiceImpl implements PostService {
         @Autowired
         PostRepository postRepository;
+        @PersistenceContext
+        EntityManager entityManager;
 
         @Override
-        @Transactional
         public void save(User user, boolean firePostException) {
+            entityManager.getProperties();
             Post post = Post.builder().content("Hello World").user(user).build();
             postRepository.save(post);
             if (firePostException) {

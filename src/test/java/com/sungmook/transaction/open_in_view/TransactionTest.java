@@ -1,4 +1,4 @@
-package com.sungmook.transaction.simple;
+package com.sungmook.transaction.open_in_view;
 
 import com.sungmook.transaction.PostService;
 import com.sungmook.transaction.UserService;
@@ -14,26 +14,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {
+        DispatcherServletAutoConfiguration.class,
         HibernateJpaAutoConfiguration.class,
         DataSourceAutoConfiguration.class,
         TransactionAutoConfiguration.class,
         PropertySourcesPlaceholderConfigurer.class,
-        TestConfiguration.class, TransactionTest.UserServiceImpl.class, TransactionTest.PostServiceImpl.class})
+        TestConfiguration.class, TransactionTest.UserServiceImpl.class, TransactionTest.PostServiceImpl.class, TransactionTest.TestController.class},
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TransactionTest {
+
+    @RestController
+    static class TestController {
+        @Autowired
+        private UserService userService;
+
+        @GetMapping("/test")
+        public String test(Boolean fireUserException, Boolean firePostException){
+            userService.save(fireUserException, firePostException);
+            return "Hello";
+        }
+    }
+
 
     @Service
     static class UserServiceImpl implements UserService {
@@ -47,13 +64,10 @@ public class TransactionTest {
         public void save(boolean fireUserException, boolean firePostException) {
 
             User user1 = User.builder().name("user 1").build();
-            User user2 = User.builder().name("user 2").build();
 
             userRepository.save(user1);
-            userRepository.save(user2);
             try {
                 postService.save(user1, firePostException);
-                postService.save(user2, firePostException);
             } catch (RuntimeException re){
                 // nothing..
             }
@@ -89,12 +103,16 @@ public class TransactionTest {
     private UserRepository userRepository;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @Test
     public void save() throws Exception {
-        userService.save(false, false);
-        assertThat(userRepository.findAll().size()).isEqualTo(2);
-        assertThat(postRepository.findAll().size()).isEqualTo(2);
+        ResponseEntity<String> ret = restTemplate.getForEntity("/test?fireUserException={fireUserException}&firePostException={firePostException}", String.class, false, false);
+        log.debug("Result : {}", ret.getBody());
+
+        assertThat(userRepository.findAll().size()).isEqualTo(1);
+        assertThat(postRepository.findAll().size()).isEqualTo(1);
     }
 
     @Test
