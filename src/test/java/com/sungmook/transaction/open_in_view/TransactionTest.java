@@ -49,6 +49,11 @@ public class TransactionTest {
             userService.save(fireUserException, firePostException);
             return "Hello";
         }
+
+        @GetMapping("/no-transaction")
+        public String noTransaction(){
+            return "Hello";
+        }
     }
 
 
@@ -106,6 +111,7 @@ public class TransactionTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+
     @Test
     public void save() throws Exception {
         ResponseEntity<String> ret = restTemplate.getForEntity("/test?fireUserException={fireUserException}&firePostException={firePostException}", String.class, false, false);
@@ -114,6 +120,14 @@ public class TransactionTest {
         assertThat(userRepository.findAll().size()).isEqualTo(1);
         assertThat(postRepository.findAll().size()).isEqualTo(1);
     }
+
+    @Test
+    public void invokeNoTransaction() throws Exception {
+        ResponseEntity<String> ret = restTemplate.getForEntity("/no-transaction", String.class);
+        log.debug("Result : {}", ret.getBody());
+        restTemplate.getForEntity("/no-transaction", String.class);
+    }
+
 
     @Test
     public void fired_exception_in_user() throws Exception {

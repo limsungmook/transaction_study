@@ -6,3 +6,4 @@ logging:
     com: DEBUG
     org.springframework.transaction: DEBUG
     org.springframework.orm: DEBUG
+    org.hibernate: TRACE

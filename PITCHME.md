@@ -1,17 +1,25 @@
 ## Spring @Transactional
-##### <span style="font-family:Helvetica Neue; font-weight:bold">Deep Dive into <span style="color:#e49436">@Transactional</span> </span>
+##### <span style="font-family:Helvetica Neue; font-weight:bold"><span style="color:#e49436">@Transactional 자세하게 알아보기</span> </span>
 
+<div style="text-align: right">
+임성묵
+</div>
 ---
 
 
 #### 사전지식 - Quiz
 
-<img src="assets/quiz.jpg" alt="Quiz" style="margin-top: 0px;" />
-MySQL 쿼리 실행 결과를 맞춰주세요
+<img src="assets/quiz.jpg" alt="Quiz" style="margin-top: 0px; width:80%;" />
 
-+++
+<span style="font-size: 80%;>
+MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결과를 맞춰주세요
+</span>
 
-정답 : 1, 2, 1, 1
+---
+
+정답 : 1, 2, 1, 1 <br />
+풀이 : MySQL InnoDB 는 Repeatable Read 이기 때문에 트랜잭션 내에선 read 값이 변경되지 않는다. <br />
+자세한 설명은 뒷장에서...
 
 ---
 
@@ -24,7 +32,7 @@ MySQL 쿼리 실행 결과를 맞춰주세요
 - 성능 : 위에서 아래 방향 순서로 좋다
 - 안정성 : 아래에서 위 방향 순서로 동시 작업에서 안정성을 보장한다
 
-+++
+---
 
 ### Isolation - Read Uncommitted
 
@@ -35,7 +43,7 @@ MySQL 쿼리 실행 결과를 맞춰주세요
 (트랜잭션 진행 중 commit 하지 않은 변경사항 READ)
 </span>
 
-+++
+---
 
 ### Isolation - Read Committed
 
@@ -44,7 +52,8 @@ MySQL 쿼리 실행 결과를 맞춰주세요
 <span style="font-size: 80%">
 트랜잭션 시작 전의 데이터를 읽어온다.
 </span>
-+++
+
+---
 
 ### Isolation - Repeatable Read
 
@@ -54,7 +63,7 @@ MySQL 쿼리 실행 결과를 맞춰주세요
 cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동일한 데이터가 나온다.
 </span>
 
-+++
+---
 
 ### Isolation - Serializable
 
@@ -234,11 +243,13 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 <li style="font-size: 70%" color:white;>어디서든 Exception 이 발생하면 전체가 롤백된다</li>
 </ol>
 
+---
+
 +++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=REQUIRED @Transactional
 
 @[52-57](try-catch 로 postService 에 발생한 RuntimeException 을 잡더라도 전체가 Rollback 된다)
 
-+++
+---
 
 <img src="assets/implicit_transaction.jpg" alt="Implicit_transaction" style="margin-top: 0px; width:80%;" />
 
@@ -247,6 +258,8 @@ Transaction Aspect 의 'before' 에 호출되어 위 사항을 결정한다
 <li style="font-size: 70%; color:white;">Bean2 는 별도의 Proxy 로 진행되지 않는다</li>
 <li style="font-size: 70%; color:white;">method2 에서 Exception 이 발생해도 catch 만 하면 Rollback 되지 않는다</li>
 </ol>
+
+---
 
 +++?code=src/test/java/com/sungmook/transaction/implicit_transaction/TransactionTest.java&lang=java&title=REQUIRED @Transactional
 
