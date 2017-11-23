@@ -38,9 +38,9 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ![Read Uncommitted](assets/read_uncommitted.jpg)
 
-<div style="margin-bottom:10px;">
+<div style="margin-top:-40px;">
     <span style="font-size: 80%">
-    다른 세션에서 *변경중인 데이터*를 읽을 수 있다 <br />
+    트랜잭션 내에서 다른 세션에서 *변경중인 데이터*를 읽을 수 있다 <br />
     (트랜잭션 진행 중 commit 하지 않은 변경사항 READ)
     </span>
 </div>
@@ -51,30 +51,36 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ![Read Committed](assets/read_committed.jpg)
 
-<span style="font-size: 80%">
-트랜잭션 시작 전의 데이터를 읽어온다.
-</span>
+<div style="margin-top:-40px;">
+    <span style="font-size: 80%">
+    트랜잭션 내에선 커밋된 데이터만 읽어온다 <br />
+    </span>
+</div>
 
 ---
 
-### Isolation - Repeatable Read
+### Isolation - Repeatable Read(InnoDB 기본)
 
 <img src="assets/repeatable_read.jpg" alt="Repeatable Read" style="margin-top: 0px;" />
 
-<span style="font-size: 80%">
-cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동일한 데이터가 나온다.
-</span>
+<div style="margin-top:-40px;">
+    <span style="font-size: 80%">
+    트랜잭션 안에선 select 몇 번을 하더라도 동일한 데이터가 나온다. <br />
+    (다른 세션에서 commit 해도 동일한 값 리턴)
+    </span>
+</div>
 
 ---
 
 ### Isolation - Serializable
 
 ![Repeatable Read](assets/serializable.jpg)
-
-<span style="font-size: 80%">
-가장 강력한 안정성을 갖고 있다
-<br/>트랜잭션 내에선 Read 에도 자동으로 Lock 이 걸린다(InnoDB, Oracle)
-</span>
+<div style="margin-top:-40px;">
+    <span style="font-size: 80%">
+    가장 강력한 안정성을 갖고 있다
+    <br/>트랜잭션 내에선 Read 에도 자동으로 Lock 이 걸린다(InnoDB, Oracle 해당함)
+    </span>
+</div>
 
 ---
 
@@ -86,7 +92,7 @@ cache 처럼 한 트랜잭션 안에서 select 를 몇 번을 하더라도 동�
 
 ### JDBC Transaction
 
-+++?code=snippet/JdbcConnection.java&lang=java&title=JDBC Example
+---?code=snippet/JdbcConnection.java&lang=java&title=JDBC Example
 
 @[2](AutoCommit(false) 는 곧 START TRANSACTION 임)
 @[4](정상 처리되면 commit)
