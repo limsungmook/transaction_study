@@ -1,8 +1,8 @@
 ## Spring @Transactional
 ##### <span style="font-family:Helvetica Neue; font-weight:bold"><span style="color:#e49436">@Transactional 자세하게 알아보기</span> </span>
 
-<div style="text-align: right">
-임성묵
+<div style="text-align: right; margin-top:30px;">
+_임성묵_
 </div>
 ---
 
@@ -11,7 +11,7 @@
 
 <img src="assets/quiz.jpg" alt="Quiz" style="margin-top: 0px; width:80%;" />
 
-<span style="font-size: 80%;>
+<span style="font-size: 80%;">
 MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결과를 맞춰주세요
 </span>
 
@@ -20,7 +20,7 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 정답 : 1, 2, 1, 1 <br />
 풀이 : MySQL InnoDB 는 Repeatable Read 이기 때문에 트랜잭션 내에선 read 값이 변경되지 않는다. <br />
 자세한 설명은 뒷장에서...
-
+문제 의도 : 트랜잭션을 제대로 사용하려면 코드 구현 뿐만 아니라 DBMS 기본 정책도 인지해야한다
 ---
 
 
@@ -38,10 +38,12 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ![Read Uncommitted](assets/read_uncommitted.jpg)
 
-<span style="font-size: 80%">
-다른 세션에서 *변경중인 데이터*를 읽을 수 있다 <br />
-(트랜잭션 진행 중 commit 하지 않은 변경사항 READ)
-</span>
+<div style="margin-bottom:10px;">
+    <span style="font-size: 80%">
+    다른 세션에서 *변경중인 데이터*를 읽을 수 있다 <br />
+    (트랜잭션 진행 중 commit 하지 않은 변경사항 READ)
+    </span>
+</div>
 
 ---
 
