@@ -92,7 +92,7 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ### JDBC Transaction
 
----?code=snippet/JdbcConnection.java&lang=java&title=JDBC Example
+?code=snippet/JdbcConnection.java&lang=java&title=JDBC Example
 
 @[2](AutoCommit(false) 는 곧 START TRANSACTION 임)
 @[4](정상 처리되면 commit)
