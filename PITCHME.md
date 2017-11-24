@@ -110,7 +110,7 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ---?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=Simple @Transactional usage
 
-@[70-73](@Transactional 적용)
+@[70-73, 79](@Transactional 적용)
 
 ---
 
