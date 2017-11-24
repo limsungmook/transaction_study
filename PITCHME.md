@@ -89,6 +89,15 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ---
 
+- Java
+- JavaScript |
+- Kotlin     |
+- Go         |
+- Scala      |
+
+
+---
+
 ## Spring Dynamic Proxy
 
 <img src="assets/dynamic_proxy.jpg" alt="Quiz" style="margin-top: 0px; width:80%;" />
@@ -98,8 +107,6 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ---?code=snippet/JdbcConnection.java&lang=java&title=JDBC Transaction
 
-
-<span class="code-presenting-annotation fragment current-only visible current-fragment" data-fragment-index="-1">AutoCommit(false) 는 곧 START TRANSACTION 임</span>
 @[2](AutoCommit(false) 는 곧 START TRANSACTION 임)
 @[4](정상 처리되면 commit)
 @[5-6](문제 발생시 Rollback)
