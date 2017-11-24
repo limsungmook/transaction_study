@@ -1,3 +1,5 @@
 theme : night
 slide-number : true
 highlight: androidstudio
+theme-override : PITCHME.css
+published : true
