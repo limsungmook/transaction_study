@@ -91,10 +91,10 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ## Spring Dynamic Proxy
 
-![Dynamic Proxy](assets/dynamic_proxy.jpg)
+<img src="assets/dynamic_proxy.jpg" alt="Quiz" style="margin-top: 0px; width:80%;" />
 
-@Transactional 메소드는 실제론 위와 같이 호출된다<br />
-인터페이스를 통해 호출하지 않으면 트랜잭션이 실행되지 않는다
+@Transactional 메소드가 AOP에 의해 호출되는 모습<br />
+즉, 인터페이스를 통해 호출하지 않으면 트랜잭션이 먹지 않는다
 
 ---?code=snippet/JdbcConnection.java&lang=java&title=JDBC Transaction
 
