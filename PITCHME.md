@@ -89,15 +89,6 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ---
 
-- Java
-- JavaScript |
-- Kotlin     |
-- Go         |
-- Scala      |
-
-
----
-
 ## Spring Dynamic Proxy
 
 <img src="assets/dynamic_proxy.jpg" alt="Quiz" style="margin-top: 0px; width:80%;" />
