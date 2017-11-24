@@ -3,3 +3,5 @@ slide-number : true
 highlight: androidstudio
 theme-override : PITCHME.css
 published : true
+#transition : fade
+gatoken : UA-86901662-1
