@@ -61,7 +61,7 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ### Isolation - Repeatable Read(InnoDB 기본)
 
-<img src="assets/repeatable_read.jpg" alt="Repeatable Read" style="margin-top: 0px;" />
+<img src="assets/repeatable_read.jpg" alt="Repeatable Read" style="margin-top: 0px; width: 780px;" />
 
 <div style="margin-top:-40px;">
     <span style="font-size: 80%">
@@ -84,9 +84,17 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ---
 
+앞의 네 가지 Isolation 은 어플리케이션 트랜잭션에서도 동일하게 설정할 수 있다<br />
+@Transactional 메소드 호출 시 Isolation 에 대한 이해 없이 사용하면 낭패를 볼 수 있다.
+
+---
+
 ## Spring Dynamic Proxy
 
 ![Dynamic Proxy](assets/dynamic_proxy.jpg)
+
+@Transactional 메소드는 실제론 위와 같이 호출된다<br />
+인터페이스를 통해 호출하지 않으면 트랜잭션이 실행되지 않는다
 
 ---?code=snippet/JdbcConnection.java&lang=java&title=JDBC Transaction
 
