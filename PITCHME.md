@@ -88,41 +88,27 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ![Dynamic Proxy](assets/dynamic_proxy.jpg)
 
----
-
-### JDBC Transaction
-
----?code=snippet/JdbcConnection.java&lang=java&title=JDBC Example
+---?code=snippet/JdbcConnection.java&lang=java&title=JDBC Transaction
 
 @[2](AutoCommit(false) 는 곧 START TRANSACTION 임)
 @[4](정상 처리되면 commit)
 @[5-6](문제 발생시 Rollback)
 @[7-9](성공,실패 상관 없이 커넥션은 꼭 닫아줘야한다)
 
----
-
-### TransactionTemplate
-
-+++?code=snippet/TransactionTemplate.java&lang=java&title=TransactionTemplate Internal
+---?code=snippet/TransactionTemplate.java&lang=java&title=TransactionTemplate - Internal
 
 @[9](Spring 에서 DI 된 transactionManager 로부터 트랜잭션을 가져온다)
 @[12](콜백 클래스의 doInTransaction 을 실행한다)
 @[14-28](Exception 발생 시 롤백을 진행한다)
 @[29](Exception 이 발생하지 않았으면 commit 한다)
 
-+++
 
-### TransactionTemplate Usage
-
-+++?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java&title=Simple TransactionTemplate usage
+---?code=src/test/java/com/sungmook/transaction/template/TransactionTest.java&lang=java&title=Simple TransactionTemplate usage
 
 @[72-73, 76-80](TransactionAutoConfiguration 에 의해 DI 받은 transactionTemplate 을 통해 실행)
 
----
 
-### @Transactional
-
-+++?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=Simple @Transactional usage
+---?code=src/test/java/com/sungmook/transaction/simple/TransactionTest.java&lang=java&title=Simple @Transactional usage
 
 @[70-73](@Transactional 적용)
 
