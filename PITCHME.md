@@ -84,8 +84,8 @@ MySQL InnoDB 에서 두 세션으로 각각의 쿼리를 실행했을 때의 결
 
 ---
 
-앞의 네 가지 Isolation 은 어플리케이션 트랜잭션에서도 동일하게 설정할 수 있다<br />
-@Transactional 메소드 호출 시 Isolation 에 대한 이해 없이 사용하면 낭패를 볼 수 있다.
+앞의 네 가지 Isolation 은 어플리케이션 트랜잭션에서도 동일하게 사용된다<br /><br />
+즉, @Transactional 메소드 호출 시 Isolation 에 대한 이해 없이 사용하면 낭패를 볼 수 있다. (Dirty, Phantom, Repeatable, Lock, etc..)
 
 ---
 
